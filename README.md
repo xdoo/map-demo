@@ -40,5 +40,5 @@ Die muss natürlich vorher importiert werden, wenn nicht der Router verwendet wi
 
 ## Deployment auf Heroku
 
-Um die Anwendung vorführen zu können, muss sie entweder auf einem Rechner loakl ausgeführt werden (siehe oben), oder auf einem öffentlichen Server ausgebracht werden. Heroku eignet sich hierfür gut (ein kostenloses Image reicht vollkommen). Die Anwendung ist so konfiguriert, dass sie automatisch auf Heroku ausgeführt wird, sobal das Git Repository mit der Heroku App verbunden wurde.
+Um die Anwendung vorführen zu können, muss sie entweder auf einem Rechner loakl ausgeführt werden (siehe oben), oder auf einem öffentlichen Server ausgebracht werden. Heroku eignet sich hierfür gut (ein kostenloses Image reicht vollkommen). Die Anwendung ist so konfiguriert, dass sie automatisch auf Heroku ausgeführt wird, sobald das Git Repository mit der Heroku App verbunden wurde.
  

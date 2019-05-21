@@ -1,5 +1,7 @@
 # map-demo
 
+![Map demo](/images/screencapture-localhost-8080-2019-05-21-09_10_16.png)
+
 ## Project setup
 
 Konsole öffnen in das Projektverzeichnis wechseln und `npm install` absetzen. Voraussetzung: npm muss installiert sein. 

@@ -10,7 +10,19 @@ Um das Projekt lokal zu testen, Konsole öffnen und im Projektverzeichnis `npm r
 
 ## Pakete zur Kartendarstellung
 
-Um die Karten in Vue.je einzubetten wurde leaflet (https://leafletjs.com/) in Verbindung mit Vue2Leaflet (https://korigan.github.io/Vue2Leaflet/#/) verwendet. Zusätzliches Kartenmaterial kann unter https://leaflet-extras.github.io/leaflet-providers/preview/ gefunden werden. Auch die Esri Karten (die dann natürlich auf einem öffentlichen Server liegen). Die Karten können dann in der Komponente '/components/DemoMap.vue' eingebunden werden. Das entsprechende Attribut habe ich im Code makiert.
+Um die Karten in Vue.je einzubetten wurde leaflet (https://leafletjs.com/) in Verbindung mit Vue2Leaflet (https://korigan.github.io/Vue2Leaflet/#/) verwendet. Zusätzliches Kartenmaterial kann unter https://leaflet-extras.github.io/leaflet-providers/preview/ gefunden werden. Auch die Esri Karten (die dann natürlich auf einem öffentlichen Server liegen). Die Karten können dann in der Komponente '/components/DemoMap.vue' eingebunden werden. Das entsprechende Attribut habe ich im Code markiert:
+
+```Javascript
+  data() {
+    return {
+      zoom: 12,
+      // hier muss dann die esri map referenziert werden
+      url:'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
+      attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      center: [48.1371181,11.5755711] // Marienplatz
+    }
+  }
+```
 
 ## Weitere grafische Elemente
 

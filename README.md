@@ -38,3 +38,7 @@ Um die Anwendung mit weiteren grafischen Elementen (z.B. Navigation links, Suchf
 
 Die muss natürlich vorher importiert werden, wenn nicht der Router verwendet wird (Habe ich jetzt in diesem kleinen Demo nicht verwendet - wenn man einen Seitenwechsel zeigen will, dann benötigt man den aber.).
 
+## Deployment auf Heroku
+
+Um die Anwendung vorführen zu können, muss sie entweder auf einem Rechner loakl ausgeführt werden (siehe oben), oder auf einem öffentlichen Server ausgebracht werden. Heroku eignet sich hierfür gut (ein kostenloses Image reicht vollkommen). Die Anwendung ist so konfiguriert, dass sie automatisch auf Heroku ausgeführt wird, sobal das Git Repository mit der Heroku App verbunden wurde.
+ 

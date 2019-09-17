@@ -3,7 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 
 // leaflet imports
-import { L, LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 

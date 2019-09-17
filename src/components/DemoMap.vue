@@ -11,8 +11,6 @@
   </div>
 </template>
 <script>
-import { L } from 'vue2-leaflet'
-
 export default {
   name: 'demoMap',
   data() {
@@ -26,10 +24,10 @@ export default {
   },
   methods: {
     showCenter (event) {
-      console.log('moved -> ' + event)
+      console.log('moved -> ' + event) // eslint-disable-line no-console
     },
     showZoom (event) {
-      console.log('zoomed -> ' + event)
+      console.log('zoomed -> ' + event) // eslint-disable-line no-console
     }
   }
   

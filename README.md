@@ -41,4 +41,20 @@ Die muss natürlich vorher importiert werden, wenn nicht der Router verwendet wi
 ## Deployment auf Heroku
 
 Um die Anwendung vorführen zu können, muss sie entweder auf einem Rechner lokal ausgeführt werden (siehe oben), oder auf einem öffentlichen Server ausgebracht werden. Heroku eignet sich hierfür gut (ein kostenloses Image reicht vollkommen). Die Anwendung ist so konfiguriert, dass sie automatisch auf Heroku ausgeführt wird, sobald das Git Repository mit der Heroku App verbunden wurde.
+
+## Funktionalität
+
+Die Karte kann - wie man es beispielsweise von Google Maps kennt - durch drücken und festhalten der Maus bewegt werden. Durch scrollen mit dem Mausrad kann in die Karte herein oder aus der Karte heraus gezoomt werden. Zuätzlich kann über den Floating Action Button etwas auf der Karte eingezeichnet werden. 
+
+### Linie einzeichnen
+
+Über den Speeddial Floating Button Polygon auswählen. 
+
+![Map demo](/images/speed_dial_offen_polygon.png)
+
+Danach kann man mit der aus eine Linie auf der Karte ziehen. Der Malvorgang kann durch die Enter Taste beendet werden.
+
+![Map demo](/images/polygon.png)
+
+
  

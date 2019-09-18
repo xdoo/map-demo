@@ -78,6 +78,7 @@
         dark
         small
         color="red"
+        @click="remove()"
       >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
@@ -139,6 +140,9 @@ export default {
         this.preview = true
         this.polyline.push(event.latlng)
       }
+    },
+    remove () {
+      this.polyline = []
     },
     done (event) {
       if(event.originalEvent.key === 'Enter') {

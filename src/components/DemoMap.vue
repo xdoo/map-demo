@@ -1,11 +1,20 @@
 <template>
     <v-card style="height: 100%; width: 100%; margin: 0">
     <l-map 
+      ref="map"
       :zoom="zoom" 
       :center="center" 
       style="z-index: 1"
       v-on:update:center="showCenter($event)"
-      v-on:update:zoom="showZoom($event)">
+      v-on:update:zoom="showZoom($event)"
+      v-on:mousemove="previewObject($event)"
+      v-on:keypress="done($event)"
+      v-on:click="addPoint($event)">
+      <l-polyline
+        ref="polyline"
+        :lat-lngs="polyline"
+      >
+      </l-polyline>
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     </l-map>
     <v-speed-dial
@@ -13,7 +22,6 @@
       fixed
       bottom
       right
-      open-on-hover
     >
       <template v-slot:activator>
         <v-btn
@@ -39,8 +47,10 @@
         dark
         small
         color="indigo"
+        @click="addPolyLine()"
       >
-        <v-icon>mdi-vector-line</v-icon>
+        <v-icon v-if="drawpolyline">mdi-check-bold</v-icon>
+        <v-icon v-else>mdi-vector-polyline</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -54,10 +64,15 @@
   </v-card>
 </template>
 <script>
+import { L } from 'leaflet'
+
 export default {
   name: 'demoMap',
   data() {
     return {
+      preview: false,
+      drawpolyline: false,
+      polyline: [],
       fab: false,
       zoom: 12,
       // hier muss dann die esri map referenziert werden
@@ -67,11 +82,54 @@ export default {
     }
   },
   methods: {
+    addPolyLine () {
+      if (this.drawpolyline) {
+        this.drawpolyline = false
+      } else {
+        console.log('add polyline' + L) // eslint-disable-line no-console
+        this.drawpolyline = true
+        this.polyline = []
+      }
+    },
     showCenter (event) {
       console.log('moved -> ' + event) // eslint-disable-line no-console
     },
     showZoom (event) {
       console.log('zoomed -> ' + event) // eslint-disable-line no-console
+    },
+    // showMouse (event) {
+      // console.log('my mouse -> ' + event.latlng + ' -- ' + this.$refs.map.zoom) // eslint-disable-line no-console
+    // },
+    addPoint (event) {
+      if (this.drawpolyline) {
+        this.polyline.push(event.latlng)
+      }
+
+      this.preview = false
+    },
+    /**
+     * Zeichnet das Objekt als Vorschau. Bei einem
+     * Polygon die Strcke vom letzten punkt zur Maus.
+     */
+    previewObject (event) {
+
+      // Preview für den Polygon Modus
+      if (this.drawpolyline && this.preview) {
+        this.polyline.pop()
+        this.polyline.push(event.latlng)
+      } else if(this.drawpolyline) {
+        this.preview = true
+        this.polyline.push(event.latlng)
+      }
+    },
+    done (event) {
+      if(event.originalEvent.key === 'Enter') {
+        if(this.drawpolyline && this.preview) {
+          this.polyline.pop()
+          this.drawpolyline = false
+          this.preview = false
+        }
+      } 
     }
   }
   

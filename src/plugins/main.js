@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import vuetify from './plugins/vuetify';
 import App from './App.vue'
+import vuetify from './plugins/vuetify'
 
 // leaflet imports
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'

@@ -5,6 +5,7 @@
       :zoom="zoom" 
       :center="center" 
       style="z-index: 1"
+      v-bind:style="{cursor: cursor}"
       v-on:update:center="showCenter($event)"
       v-on:update:zoom="showZoom($event)"
       v-on:mousemove="previewObject($event)"
@@ -36,40 +37,60 @@
       </template>
       <v-btn
         fab
+        :disabled="drawing"
         dark
         small
-        color="green"
+        color="indigo"
       >
         <v-icon>mdi-map-marker-plus</v-icon>
       </v-btn>
       <v-btn
         fab
+        :disabled="drawing"
         dark
         small
         color="indigo"
         @click="addPolyLine()"
       >
-        <v-icon v-if="drawpolyline">mdi-check-bold</v-icon>
-        <v-icon v-else>mdi-vector-polyline</v-icon>
+        <v-icon>mdi-vector-polyline</v-icon>
       </v-btn>
       <v-btn
         fab
+        :disabled="drawing"
+        dark
+        small
+        color="indigo"
+      >
+        <v-icon>mdi-vector-square</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        :disabled="drawing"
+        dark
+        small
+        color="green"
+      >
+        <v-icon>mdi-check-bold</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        :disabled="drawing"
         dark
         small
         color="red"
       >
-        <v-icon>mdi-vector-square</v-icon>
+        <v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-speed-dial>
   </v-card>
 </template>
 <script>
-import { L } from 'leaflet'
-
 export default {
   name: 'demoMap',
   data() {
     return {
+      cursor: 'all-scroll',
+      drawing: false,
       preview: false,
       drawpolyline: false,
       polyline: [],
@@ -83,13 +104,10 @@ export default {
   },
   methods: {
     addPolyLine () {
-      if (this.drawpolyline) {
-        this.drawpolyline = false
-      } else {
-        console.log('add polyline' + L) // eslint-disable-line no-console
-        this.drawpolyline = true
-        this.polyline = []
-      }
+      this.drawing = true
+      this.cursor = 'crosshair'
+      this.drawpolyline = true
+      this.polyline = []
     },
     showCenter (event) {
       console.log('moved -> ' + event) // eslint-disable-line no-console
@@ -109,7 +127,7 @@ export default {
     },
     /**
      * Zeichnet das Objekt als Vorschau. Bei einem
-     * Polygon die Strcke vom letzten punkt zur Maus.
+     * Polygon die Strecke vom letzten Punkt zur Maus.
      */
     previewObject (event) {
 
@@ -129,6 +147,9 @@ export default {
           this.drawpolyline = false
           this.preview = false
         }
+
+        this.drawing = false
+        this.cursor = 'all-scroll'
       } 
     }
   }

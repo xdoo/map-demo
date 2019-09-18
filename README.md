@@ -1,6 +1,6 @@
 # map-demo
 
-![Map demo](/images/screencapture-localhost-8080-2019-05-21-09_10_16.png)
+![Map demo](/images/startseite.png)
 
 ## Project setup
 

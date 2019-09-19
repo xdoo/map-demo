@@ -73,7 +73,7 @@ Danach kann man mit der Maus eine Linie auf der Karte ziehen. Der Malvorgang kan
 
 ![Map demo](/images/speed_dial_offen_polygon.png)
 
-Danach kann mit der Maus ein Polygon auf die Karte zeichnen. Dazu den ersten Punkt mit "Klick" makieren und die weiteren Punkte ebenfalls mit Klick setzen. Die Bearbeitung kann mit "Enter" beendet werden.
+Danach kann mit der Maus ein Polygon auf die Karte zeichnen. Dazu den ersten Punkt mit "Klick" markieren und die weiteren Punkte ebenfalls mit Klick setzen. Die Bearbeitung kann mit "Enter" beendet werden.
 
 ![Map demo](/images/polygon.png)
 

@@ -6,11 +6,10 @@
       :center="center" 
       style="z-index: 1"
       v-bind:style="{cursor: cursor}"
-      v-on:update:center="showCenter($event)"
-      v-on:update:zoom="showZoom($event)"
       v-on:mousemove="previewObject($event)"
       v-on:keypress="done($event)"
-      v-on:click="addPoint($event)">
+      v-on:click="addPoint($event)"
+      v-on:dblclick="dblclick($event)">
       <l-polyline
         ref="polyline"
         :lat-lngs="pointspolyline"
@@ -124,15 +123,6 @@ export default {
       this.drawpolygon = true
       this.pointspolygon = []
     },
-    showCenter (event) {
-      console.log('moved -> ' + event) // eslint-disable-line no-console
-    },
-    showZoom (event) {
-      console.log('zoomed -> ' + event) // eslint-disable-line no-console
-    },
-    // showMouse (event) {
-      // console.log('my mouse -> ' + event.latlng + ' -- ' + this.$refs.map.zoom) // eslint-disable-line no-console
-    // },
     addPoint (event) {
       if (this.drawpolyline) {
         this.pointspolyline.push(event.latlng)
@@ -177,13 +167,26 @@ export default {
       this.pointspolygon = []
     },
     /**
-     * Diese Methode wird durch ein Keyboard event ausgelöst. Es
-     * wird geprüft, ob die Entertaste gedrückt wurde. Wenn
-     * ja, dann wird der Malvorgang am letzten gesetzen
-     * Punkt beendet.
+     * Tastendruck Enter zum Beenden des Malvorgangs.
      */
-    done (event) {
+    enter (event) {
       if(event.originalEvent.key === 'Enter') {
+        this.done()
+      }
+    },
+    /**
+     * Doppelklick zum Beenden des Malvorgangs.
+     */
+    dblclick (event) {
+      console.log()
+      this.done(event.type)
+    },
+    /**
+     * Diese Methode löscht alle auf der Karte gesetzten Punkte.
+     * Dabei ist es egal, ab es sich um eine Linie, ein Ploygon
+     * oder nur einen einzelnen Punkt handelt.
+     */
+    done () {
 
         // Beendet den Malvorgang auf der Polyline
         if(this.drawpolyline && this.preview) {
@@ -201,7 +204,6 @@ export default {
 
         this.drawing = false
         this.cursor = 'all-scroll'
-      } 
     }
   }
   

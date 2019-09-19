@@ -13,9 +13,14 @@
       v-on:click="addPoint($event)">
       <l-polyline
         ref="polyline"
-        :lat-lngs="polyline"
+        :lat-lngs="pointspolyline"
       >
       </l-polyline>
+      <l-polygon
+        ref="polygon"
+        :lat-lngs="pointspolygon"
+      >
+      </l-polygon>
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     </l-map>
     <v-speed-dial
@@ -60,8 +65,9 @@
         dark
         small
         color="indigo"
+        @click="addPolygon()"
       >
-        <v-icon>mdi-vector-square</v-icon>
+        <v-icon>mdi-vector-polygon</v-icon>
       </v-btn>
       <v-btn
         fab
@@ -94,7 +100,9 @@ export default {
       drawing: false,
       preview: false,
       drawpolyline: false,
-      polyline: [],
+      drawpolygon: false,
+      pointspolyline: [],
+      pointspolygon: [],
       fab: false,
       zoom: 12,
       // hier muss dann die esri map referenziert werden
@@ -106,9 +114,15 @@ export default {
   methods: {
     addPolyLine () {
       this.drawing = true
-      this.cursor = 'crosshair'
+      this.cursor = 'pointer'
       this.drawpolyline = true
-      this.polyline = []
+      this.pointspolyline = []
+    },
+    addPolygon () {
+      this.drwaing = true
+      this.cursor = 'pointer'
+      this.drawpolygon = true
+      this.pointspolygon = []
     },
     showCenter (event) {
       console.log('moved -> ' + event) // eslint-disable-line no-console
@@ -121,7 +135,11 @@ export default {
     // },
     addPoint (event) {
       if (this.drawpolyline) {
-        this.polyline.push(event.latlng)
+        this.pointspolyline.push(event.latlng)
+      }
+
+      if (this.drawpolygon) {
+        this.pointspolygon.push(event.latlng)
       }
 
       this.preview = false
@@ -132,23 +150,52 @@ export default {
      */
     previewObject (event) {
 
-      // Preview für den Polygon Modus
+      // Preview für den Polyline Modus
       if (this.drawpolyline && this.preview) {
-        this.polyline.pop()
-        this.polyline.push(event.latlng)
+        this.pointspolyline.pop()
+        this.pointspolyline.push(event.latlng)
       } else if(this.drawpolyline) {
         this.preview = true
-        this.polyline.push(event.latlng)
+        this.pointspolyline.push(event.latlng)
+      }
+
+      // Preview für den Polygon Modus
+      if (this.drawpolygon && this.preview) {
+        this.pointspolygon.pop()
+        this.pointspolygon.push(event.latlng)
+      } else if(this.drawpolygon) {
+        this.preview = true
+        this.pointspolygon.push(event.latlng)
       }
     },
+    /**
+     * Diese Methode löscht alle gemalten Punkte auf
+     * der Karte. 
+     */
     remove () {
-      this.polyline = []
+      this.pointspolyline = []
+      this.pointspolygon = []
     },
+    /**
+     * Diese Methode wird durch ein Keyboard event ausgelöst. Es
+     * wird geprüft, ob die Entertaste gedrückt wurde. Wenn
+     * ja, dann wird der Malvorgang am letzten gesetzen
+     * Punkt beendet.
+     */
     done (event) {
       if(event.originalEvent.key === 'Enter') {
+
+        // Beendet den Malvorgang auf der Polyline
         if(this.drawpolyline && this.preview) {
-          this.polyline.pop()
+          this.pointspolyline.pop()
           this.drawpolyline = false
+          this.preview = false
+        }
+
+        // Beendet den Malvorgang auf dem Polygon
+        if(this.drawpolygon && this.preview) {
+          this.pointspolygon.pop()
+          this.drawpolygon = false
           this.preview = false
         }
 

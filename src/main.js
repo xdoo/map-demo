@@ -3,7 +3,7 @@ import vuetify from './plugins/vuetify';
 import App from './App.vue'
 
 // leaflet imports
-import { LMap, LTileLayer, LMarker, LPopup, LPolyline } from 'vue2-leaflet'
+import { LMap, LTileLayer, LMarker, LPopup, LPolyline, LPolygon } from 'vue2-leaflet'
 import { Icon } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -14,6 +14,7 @@ Vue.component('l-tile-layer', LTileLayer)
 Vue.component('l-marker', LMarker)
 Vue.component('l-popup', LPopup)
 Vue.component('l-polyline', LPolyline)
+Vue.component('l-polygon', LPolygon)
 
 delete Icon.Default.prototype._getIconUrl;
 

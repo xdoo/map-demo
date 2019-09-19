@@ -10,15 +10,14 @@
       v-on:keypress="done($event)"
       v-on:click="addPoint($event)">
       <l-polyline
-        ref="polyline"
         :lat-lngs="pointspolyline"
       >
       </l-polyline>
       <l-polygon
-        ref="polygon"
         :lat-lngs="pointspolygon"
       >
       </l-polygon>
+      <l-marker v-for="marker in markers" :key="marker.lat" :lat-lng="marker"></l-marker>
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     </l-map>
     <v-speed-dial
@@ -44,6 +43,7 @@
         dark
         small
         color="indigo"
+        @click="addMarker()"
       >
         <v-icon>mdi-map-marker-plus</v-icon>
       </v-btn>
@@ -99,8 +99,10 @@ export default {
       preview: false,
       drawpolyline: false,
       drawpolygon: false,
+      drawpoint: false,
       pointspolyline: [],
       pointspolygon: [],
+      markers: [],
       fab: false,
       zoom: 12,
       // hier muss dann die esri map referenziert werden
@@ -110,25 +112,53 @@ export default {
     }
   },
   methods: {
+    /**
+     * Startet den Modus um eine Linie auf der Karte zu zeichen.
+     */
     addPolyLine () {
       this.drawing = true
       this.cursor = 'pointer'
       this.drawpolyline = true
       this.pointspolyline = []
     },
+    /**
+     * Startet den Modus, um ein Polygon auf der Karte zu zeichen.
+     */
     addPolygon () {
-      this.drwaing = true
+      this.drawing = true
       this.cursor = 'pointer'
       this.drawpolygon = true
       this.pointspolygon = []
     },
+    /**
+     * Startet den Modus um einen Marker auf der Karte zu setzen.
+     */
+    addMarker () {
+      this.drawing = false
+      this.cursor = 'pointer'
+      this.drawpoint = true
+      this.marker = []
+    },
+    /**
+     * Fügt dem aktuellen Zeichenobjekt einen (weiteren)
+     * Punkt hinzu.
+     */
     addPoint (event) {
+
+      // Linie
       if (this.drawpolyline) {
         this.pointspolyline.push(event.latlng)
       }
 
+      // Polygon
       if (this.drawpolygon) {
         this.pointspolygon.push(event.latlng)
+      }
+
+      // Punkt
+      if (this.drawpoint) {
+        this.drawpoint = false
+        this.markers.push(event.latlng)
       }
 
       this.preview = false
@@ -164,6 +194,7 @@ export default {
     remove () {
       this.pointspolyline = []
       this.pointspolygon = []
+      this.markers = []
     },
     /**
      * Tastendruck Enter zum Beenden des Malvorgangs.

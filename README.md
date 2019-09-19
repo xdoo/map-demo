@@ -46,13 +46,34 @@ Um die Anwendung vorführen zu können, muss sie entweder auf einem Rechner loka
 
 Die Karte kann - wie man es beispielsweise von Google Maps kennt - durch drücken und festhalten der Maus bewegt werden. Durch scrollen mit dem Mausrad kann in die Karte herein oder aus der Karte heraus gezoomt werden. Zuätzlich kann über den Floating Action Button etwas auf der Karte eingezeichnet werden. 
 
+### Punkt setzen
+
+Über den Speeddial Floating Button "Punkt setzen" auswählen.
+
+![Map demo](/images/speed_dial_offen_punkt.png)
+
+Danach kann per Mausklick auf der Karte ein Punkt gesetzt werden. Der Bearbeitungsmodus wird mit setzen des Punktes automatisch beendet. D.h. es kann immer nur ein Punkt auf der Karte gesetzt werden (sollte die anforderung anders sein, dann können natürlich auch mehrere Punkte gesetzt werden). Will man den Punkt versetzen, so muss dieser erst gelöscht werden (Mülleimer im Seepdial Menü).
+
+![Map demo](/images/punkt.png)
+
+
 ### Linie einzeichnen
+
+Über den Speeddial Floating Button Linie auswählen. 
+
+![Map demo](/images/speed_dial_offen_linie.png)
+
+Danach kann man mit der Maus eine Linie auf der Karte ziehen. Der Malvorgang kann durch die Enter Taste beendet werden.
+
+![Map demo](/images/linie.png)
+
+### Polygon (geschlossen Fläche) einzeichnen
 
 Über den Speeddial Floating Button Polygon auswählen. 
 
 ![Map demo](/images/speed_dial_offen_polygon.png)
 
-Danach kann man mit der aus eine Linie auf der Karte ziehen. Der Malvorgang kann durch die Enter Taste beendet werden.
+Danach kann mit der Maus ein Polygon auf die Karte zeichnen. Dazu den ersten Punkt mit "Klick" makieren und die weiteren Punkte ebenfalls mit Klick setzen. Die Bearbeitung kann mit "Enter" beendet werden.
 
 ![Map demo](/images/polygon.png)
 

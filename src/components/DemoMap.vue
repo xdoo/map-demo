@@ -145,14 +145,17 @@ export default {
      */
     addPoint (event) {
 
+      // Linie
       if (this.drawpolyline) {
         this.pointspolyline.push(event.latlng)
       }
 
+      // Polygon
       if (this.drawpolygon) {
         this.pointspolygon.push(event.latlng)
       }
 
+      // Punkt
       if (this.drawpoint) {
         this.drawpoint = false
         this.markers.push(event.latlng)

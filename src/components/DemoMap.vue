@@ -8,8 +8,7 @@
       v-bind:style="{cursor: cursor}"
       v-on:mousemove="previewObject($event)"
       v-on:keypress="done($event)"
-      v-on:click="addPoint($event)"
-      v-on:dblclick="dblclick($event)">
+      v-on:click="addPoint($event)">
       <l-polyline
         ref="polyline"
         :lat-lngs="pointspolyline"
@@ -173,13 +172,6 @@ export default {
       if(event.originalEvent.key === 'Enter') {
         this.done()
       }
-    },
-    /**
-     * Doppelklick zum Beenden des Malvorgangs.
-     */
-    dblclick (event) {
-      console.log()
-      this.done(event.type)
     },
     /**
      * Diese Methode löscht alle auf der Karte gesetzten Punkte.
